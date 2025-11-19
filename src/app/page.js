@@ -1,9 +1,13 @@
 import Banner from "@/components/banner";
+import Insta from "@/components/Insta";
+import Sobre from "@/components/Sobre";
 
 export default function Home() {
   return (
-    <div>
+    <div className="">
       <Banner />
+      <Sobre />
+      <Insta />
     </div>
   );
 }

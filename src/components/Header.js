@@ -7,7 +7,7 @@ import { BiLogoFacebookCircle } from "react-icons/bi";
 
 const Header = () => {
     return (
-        <header className="">
+        <header className="bg-azul">
             <div className="flex justify-between px-15 py-4">
                 <div className="flex gap-10 *:flex *:items-center *:gap-2">
                     <div><BiPhone className="text-2xl" />Telefone</div>
@@ -21,7 +21,7 @@ const Header = () => {
             </div>
             <div className="flex justify-between px-15 py-4">
             <div>
-                <a href="/"></a>
+                <a href="/">LOGO</a>
             </div>
             <nav className="flex gap-10">
                 <a href="">Sobre nós</a>
