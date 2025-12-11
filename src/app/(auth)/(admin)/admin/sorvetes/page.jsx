@@ -1,13 +1,13 @@
 'use client'
 import { SiteContext } from "@/contexts/siteProvider";
 import { API } from "@/services";
-import { Button, Drawer, Form, Input, Popconfirm, Table } from "antd";
+import { Button, Drawer, Form, Input, Popconfirm, Select, Table } from "antd";
 import { useContext, useEffect, useState } from "react";
 import { BiPencil, BiPlus, BiTrash } from "react-icons/bi";
 
-const Niveis = () => {
+const Sorvetes = () => {
 
-    const [niveis, setNiveis] = useState([]);
+    const [sorvetes, setSorvetes] = useState([]);
     const [verCriar, setVerCriar] = useState(false);
     const [verEditar, setVerEditar] = useState(false);
     const [formEditar] = Form.useForm();
@@ -16,8 +16,8 @@ const Niveis = () => {
 
     async function buscar() {
         try {
-            const response = await API.get("/niveis");
-            setNiveis(response.data);
+            const response = await API.get("/sorvetes");
+            setSorvetes(response.data);
         } catch (error) {
             api[error.response.data.tipo]({
                 description: error.response.data.mensagem
@@ -26,8 +26,8 @@ const Niveis = () => {
     }
     async function editar(dados) {
         try {
-            setLoading(true)    
-            const response = await API.put(`/niveis/${dados.id}`, dados);
+            setLoading(true)
+            const response = await API.put(`/sorvetes/${dados.id}`, dados);
             api[response.data.tipo]({
                 description: response.data.mensagem,
                 onClose: () => {
@@ -39,14 +39,14 @@ const Niveis = () => {
             api[error.response.data.tipo]({
                 description: error.response.data.mensagem
             })
-        }finally{
+        } finally {
             setLoading(false)
         }
     }
     async function deletar(id) {
         try {
-            setLoading(true)    
-            const response = await API.delete(`/niveis/${id}`);
+            setLoading(true)
+            const response = await API.delete(`/sorvetes/${id}`);
             api[response.data.tipo]({
                 description: response.data.mensagem,
                 onClose: () => {
@@ -57,14 +57,14 @@ const Niveis = () => {
             api[error.response.data.tipo]({
                 description: error.response.data.mensagem
             })
-        }finally{
+        } finally {
             setLoading(false)
         }
     }
     async function criar(dados) {
         try {
             setLoading(true)
-            const response = await API.post("/niveis", dados);
+            const response = await API.post("/sorvetes", dados);
             api[response.data.tipo]({
                 description: response.data.mensagem,
                 onClose: () => {
@@ -76,7 +76,7 @@ const Niveis = () => {
             api[error.response.data.tipo]({
                 description: error.response.data.mensagem
             })
-        }finally{
+        } finally {
             setLoading(false);
         }
     }
@@ -87,16 +87,16 @@ const Niveis = () => {
     return (
         <div>
             <div className="flex items-center justify-between mb-6">
-                <h6>niveis</h6>
+                <h6>Sorvetes</h6>
                 <Button type="primary"
                     shape="round"
                     icon={<BiPlus />}
                     onClick={() => { setVerCriar(true) }}>
-                    Novo nível
+                    Novo Sabor
                 </Button>
             </div>
             <Table
-                dataSource={niveis || []}
+                dataSource={sorvetes || []}
                 rowKey={"id"}
             >
                 <Table.Column
@@ -109,6 +109,11 @@ const Niveis = () => {
                     title="Nome"
                     dataIndex={"nome"}
                     key={"nome"}
+                />
+                <Table.Column
+                    title="Status"
+                    dataIndex={"status"}
+                    key={"status"}
                 />
                 <Table.Column
                     title="Ações"
@@ -147,6 +152,25 @@ const Niveis = () => {
                         rules={[{ required: true, message: "Campo obrigatorio" }]}>
                         <Input />
                     </Form.Item>
+                    <Form.Item
+                        label="Status"
+                        name="status"
+                        rules={[{ required: true, message: "Campo obrigatorio" }]}
+                    >
+                        <Select
+                            placeholder="Escolha o sabor"
+                            options={[
+                                {
+                                    label: "Ativo",
+                                    value: "Ativo"
+                                },
+                                {
+                                    label: "Inativo",
+                                    value: "inativo"
+                                }
+                            ]}
+                        />
+                    </Form.Item>
                     <Button htmlType="submit"
                         type="primary"
                         loading={loading}
@@ -173,6 +197,25 @@ const Niveis = () => {
                         rules={[{ required: true, message: "Campo obrigatorio" }]}>
                         <Input />
                     </Form.Item>
+                    <Form.Item
+                        label="Status"
+                        name="status"
+                        rules={[{ required: true, message: "Campo obrigatorio" }]}
+                    >
+                        <Select
+                            placeholder="Escolha o sabor"
+                            options={[
+                                {
+                                    label: "Ativo",
+                                    value: "Ativo"
+                                },
+                                {
+                                    label: "Inativo",
+                                    value: "inativo"
+                                }
+                            ]}
+                        />
+                    </Form.Item>
                     <Button htmlType="submit"
                         type="primary"
                         loading={loading}
@@ -183,4 +226,4 @@ const Niveis = () => {
     );
 }
 
-export default Niveis;
+export default Sorvetes;
