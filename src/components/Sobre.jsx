@@ -1,11 +1,11 @@
 import sorveteria from "@/assets/juarez-foto-1.webp"
 const Sobre = () => {
     return (
-        <div className="flex  p-10 bg-casquinha">
+        <div className="flex flex-col lg:flex-row p-4 lg:p-10 bg-casquinha">
             <div>
-                <img className="rounded w-200 mx-10" src={sorveteria.src} alt="" />
+                <img className="rounded w-200 lg:mx-10 mb-6 lg:mb-0" src={sorveteria.src} alt="" />
             </div>
-            <div className="w-2/5 text-2xl">
+            <div className="lg:w-2/5 lg:text-2xl">
                 <h2 className="text-center mb-5 text-5xl! text-abril">Nossa História</h2>
                 <p>Sorveteria Juarez fundada nos anos sessenta em Parnaiba PI vindo para Fortaleza nos anos setenta mais precisamente em 1973.</p>
                 <p className="my-10">Sempre trabalhando com as melhores frutas e com os melhores produtos em matéria-prima que existe. Na manipulação de nosso sorvete, só trabalhamos com fruta, leite e açúcar.</p>

@@ -8,13 +8,13 @@ import { BiLogoFacebookCircle } from "react-icons/bi";
 const Header = () => {
     return (
         <header className="bg-azul">
-            <div className="flex justify-between px-15 py-4">
-                <div className="flex gap-10 *:flex *:items-center *:gap-2">
+            <div className="lg:flex justify-between p-4 lg:px-15 py-4">
+                <div className="flex flex-wrap gap-4 justify-center lg:gap-10 *:flex *:items-center *:gap-2">
                     <div><BiPhone className="text-2xl" />Telefone</div>
                     <div><BiEnvelope className="text-2xl" />EmailSorveteria</div>
-                    <div><BiTime className="text-2xl" />Seg - Dom: 12h - 21h</div>
+                    <div className="w-full lg:w-auto justify-center"><BiTime className="text-2xl" />Seg - Dom: 12h - 21h</div>
                 </div>
-                <div className="flex gap-10">
+                <div className="flex gap-10 justify-center mt-4 lg:mt-0">
                     <a><BiLogoInstagram className="text-2xl" /></a>
                     <a><BiLogoFacebookCircle className="text-2xl" /></a>
                 </div>
@@ -23,7 +23,7 @@ const Header = () => {
             <div>
                 <a href="/">LOGO</a>
             </div>
-            <nav className="flex gap-10">
+            <nav className="hidden lg:flex gap-10">
                 <a href="">Sobre nós</a>
                 <a href="">Sabores</a>
                 <a href="">Na mídia</a>
