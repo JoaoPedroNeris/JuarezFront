@@ -1,31 +1,25 @@
 'use client'
 import { SiteContext } from "@/contexts/siteProvider";
+import { API } from "@/services";
 import { Button, Form, Input } from "antd";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 
 const Login = () => {
-    const { api } = useContext(SiteContext) 
+    const { api } = useContext(SiteContext)
     const [logando, setLogando] = useState(false);
     const router = useRouter();
 
     async function logar(dados) {
-        // Certifique-se de que sessionStorage só é usado no client
+        event.preventDefault();
         setLogando(true);
-        const request = await fetch("https://juarezapi.onrender.com/login", {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(dados)
-        });
-        const response = await request.json();
+        const request = await API.post("/login", dados);
+        const response = request.data;
         if (response.token) {
-            if (typeof window !== "undefined") {
-                sessionStorage.setItem("token", response.token);
-                sessionStorage.setItem("usuario", JSON.stringify(response.usuario));
-            }
-            router.push("/admin");  
+            sessionStorage.setItem("token", response.token);
+            sessionStorage.setItem("usuario", JSON.stringify(response.usuario));
+            API.defaults.headers.common.Authorization = `Bearer ${response.token}`;
+            router.push("/admin");
             return;
         }
         api.warning({
