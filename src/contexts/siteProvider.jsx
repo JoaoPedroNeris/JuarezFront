@@ -15,7 +15,11 @@ const SiteProvider = ({ children }) => {
     })
     const router = useRouter();
     
-    let token = sessionStorage.getItem("token")
+    // Só acessa sessionStorage no client
+    let token = '';
+    if (typeof window !== 'undefined') {
+        token = sessionStorage.getItem("token");
+    }
     API.defaults.headers.common.Authorization = `Bearer ${token}`
     // Adiciona um interceptador na requisição
     API.interceptors.request.use(function (config) {

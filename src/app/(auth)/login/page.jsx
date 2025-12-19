@@ -10,7 +10,7 @@ const Login = () => {
     const router = useRouter();
 
     async function logar(dados) {
-        event.preventDefault();
+        // Certifique-se de que sessionStorage só é usado no client
         setLogando(true);
         const request = await fetch("https://juarezapi.onrender.com/login", {
             method: "post",
@@ -20,9 +20,11 @@ const Login = () => {
             body: JSON.stringify(dados)
         });
         const response = await request.json();
-        if(response.token){
-            sessionStorage.setItem("token", response.token);
-            sessionStorage.setItem("usuario", JSON.stringify(response.usuario));
+        if (response.token) {
+            if (typeof window !== "undefined") {
+                sessionStorage.setItem("token", response.token);
+                sessionStorage.setItem("usuario", JSON.stringify(response.usuario));
+            }
             router.push("/admin");  
             return;
         }
